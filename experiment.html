@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .node circle {
   fill: #fff;
-  stroke: limegreen;
+  stroke: rgb(199, 118, 12);
   stroke-width: 3px;
 }
 
@@ -124,55 +125,69 @@ Borrowed from https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
         ]
       },
       { 
-        "name": "外胚层 Ectoderm",
+        "name": "内胚层 Endoderm",
         "children": [
-          { "name": "头颈部上皮细胞Head-Neck-Ep" },
-          { "name": "多能神经嵴前体Mulltpotent neural crest precursors",
+          { "name": "甲状腺祖细胞甲状腺细胞Thyroid progenitors",
+            "children": [{"name": "甲状腺细胞Thyroid cells"}]
+           },
+          { "name": "多能性肺前体细胞Multipotent lung precursor cells",
             "children": [
-              { "name": "黑色素细胞前体Melanocyte precursor",
-                "children": [{"name": "色素细胞Pigment cells"}]
+              { "name": "肺泡肺细胞Aveolar lung cells",
+                "children": [{"name": "肺泡上皮细胞Lung-Ep-Alveo"}]
                },
-              { "name": "神经干细胞Neural Stem Cells",
+              { "name": "气管-支气管细胞Tracheo bronchial cells",
                 "children": [{
-                  "name": "神经胶质祖细胞Glial Progenitor",
-                  "children":[{"name": "星形胶质细胞Astrocyte"},
-                  {"name": "少突胶质细胞Oligodendrocyte"
-                  }],
+                  "name": "支气管上皮细胞Lung-Ep-Bron",
+              }],
+         }]
+            },
+            {"name": "消化系统digestive",
+              "children": [{"name": "胰腺前体细胞Pancreatic progenitors",
+                "children": [{
+                  "name": "胰腺Pancreas",
+                  "children": [
+                  {"name": "胰腺腺泡细胞Pancreas-Acinar"},
+                  {"name": "胰腺α细胞Pancreas-Alpha"},
+                  {"name": "胰腺β细胞Pancreas-Beta"},
+                  {"name": "胰腺S细胞Pancreas-Delta"},
+                  {"name": "胰腺导管细胞Pancreas Duct"},
+                  ]
+                }]
               },
-                  {"name": "神经元祖细胞Neuron Progenitor",
-                  "children":[{"name": "神经元Neuron"},
-                  {"name": "神经组织Nerve"}
-                ]
-               }],
-              }]
-            },
-            {"name": "角质细胞干细胞/原细胞 Keratinocyte stem/progenit or cells",
-              "children": [{"name": "角角质细胞表皮细胞 Keratinocyte epidermal skin cells"}]
-            },
-            {"name": "内分泌系统 endocrine",
-            "children":[{
-              "name": "垂体Pituitary gland",
-              "children": [{"name": "前叶(腺垂体)Adenohypophysis"}]
-            },{
-              "name": "乳腺breast",
-              "children": [{"name": "乳腺基底上皮细胞Breast-Basal-Ep"},
-                {"name": "乳腺腔上皮细胞Breast-Luminal-Ep"}
+                {"name": "肠道前体细胞Gut progenitors",
+                  "children":[
+                {"name": "肠上皮细胞Gut epithelial cells"},
+                {"name": "肠上皮细胞Colon-Ep"},
+                {"name": "小肠上皮细胞Small-int Ep"},
+                  ]
+                },
+                {"name": "食管Esophagus"},
+                {"name": "肝脏前体细胞/于细胞Hepatic progenitors/stem cells",
+                  "children": [{ "name" :"肝细胞Hepatocytes(Fliver)"}]
+                },
+                {"name": "胃stom/Gastric",
+                  "children": [{"name": "胃上皮细胞Gastric-Ep"}]
+                },
               ]
-            },{
-              "name": "肾上腺adrenal_gland",
-            },{
-              "name": "唾液腺salivary gland",
             },
-            ]
+            {"name": "甲状腺祖细胞Thyroid progenitors",
+            "children":[{
+              "name": "甲状腺细胞Thyroid cells",
+            }]
             }
         ]
       },
+      {"name":"原始生殖细胞Primordial Germ cell",
+        "children": [{"name": "卵子Ovum"},
+          {"name": "精子Sperm"}
+        ]
+      }
     ]
   };
 
 // Set the dimensions and margins of the diagram
-var margin = {top: 20, right: 90, bottom: 30, left: 90},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    width = 1800 - margin.left - margin.right,
     height = 1000 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -211,8 +226,15 @@ function collapse(d) {
   }
 }
 
-function update(source) {
+// 修改1: 调整树的方向和布局
+var treeLayout = d3.tree()
+    .size([height, width])
+    .separation(function(a, b) {
+        return 0.8 + Math.random() * 0.4; // 添加随机间隔
+    });
+treeLayout(root);
 
+function update(source) {
   // Assigns the x and y position for the nodes
   var treeData = treemap(root);
 
@@ -221,7 +243,7 @@ function update(source) {
       links = treeData.descendants().slice(1);
 
   // Normalize for fixed-depth.
-  nodes.forEach(function(d){ d.y = d.depth * 150});
+  nodes.forEach(function(d){ d.y = d.depth * 180});
 
   // ****************** Nodes section ***************************
 
@@ -236,13 +258,14 @@ function update(source) {
         return "translate(" + source.y0 + "," + source.x0 + ")";
     })
     .on('click', click);
-
+  
+    
   // Add Circle for the nodes
   nodeEnter.append('circle')
       .attr('class', 'node')
       .attr('r', 1e-6)
       .style("fill", function(d) {
-          return d._children ? "lightgreen" : "#fff";
+          return d._children ? "red" : "#fff";
       });
 
   // Add labels for the nodes
@@ -270,7 +293,7 @@ function update(source) {
   nodeUpdate.select('circle.node')
     .attr('r', 10)
     .style("fill", function(d) {
-        return d._children ? "lightgreen" : "#fff";
+        return d._children ? "brown" : "#fff";
     })
     .attr('cursor', 'pointer');
 
@@ -360,6 +383,7 @@ function update(source) {
 
 
 }
+  
     </script>
 </body>
 </html>

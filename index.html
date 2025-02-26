@@ -21,6 +21,8 @@
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/responsive.css">
+        
+        
         <!-- 树的结构 -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
@@ -86,7 +88,7 @@
                                                     <li><a href="index-3.html">Home Consulting</a></li>
                                                 </ul>
                                             <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                            <li><a href="about-us.html">Markers</a></li>
+                                            <li><a href="Marker.html">Markers</a></li>
                                             <li class="menu-item-has-children"><a href="#">Download</a>
                                                 <ul class="submenu">
                                                     <li><a href="services.html">Our Services</a></li>
@@ -290,7 +292,37 @@
                         <div class="row align-items-center">
                             <div class="col-xl-7">
                                 <div class="row features-item-wrap">
+                                    <!-- swtich language -->
+                                     <!-- Example single danger button -->
+                                    <div id="english-menu" class="btn-group" style="margin-left: 180%;">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="width: 184px;">
+                                        <div class="language-thumb" style="display: inline-block; margin-right: 5px;"><img src="./img/self/lang.png" alt="language"></div>
+                                        Language
+                                        </button>
+                                        <ul class="dropdown-menu" >
+                                        <li ><a class="dropdown-item" href="#" data-lang="en">English</a></li>
+                                        <li><hr class="dropdown-divider"></li>
 
+                                        <li><a class="dropdown-item" href="#" data-lang="zh">Chinese</a></li>
+
+                                    </div>
+                                    
+                                    <div id="chinese-menu" class="btn-group" style="margin-left: 180%;">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="width: 184px;">
+                                        <div class="language-thumb" style="display: inline-block; margin-right: 5px;"><img src="./img/self/lang.png" alt="language"></div>
+                                        选择语言
+                                        </button>
+                                        <ul class="dropdown-menu" >
+                                            <li><a class="dropdown-item" href="#" data-lang="en">英文</a></li>
+
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li ><a class="dropdown-item" href="#" data-lang="zh">中文</a></li>
+                                        </ul>
+                                    </div>
+
+
+
+                                
                                     <div id="treeBody"></div>
                                     <div class="features-top-shape"><img src="img/images/features_shape01.png" alt=""></div>
                                 </div>
@@ -681,337 +713,649 @@
         <script src="js/aos.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" ></script>
         <!-- tree的js代码（第二部分） -->
+
         <script>
-            var treeData =
-          {
-            "name": "HUMAN EMBRYONIC(TOTIPOTENT)STEM CELL 人类胚胎全能干细胞",
+document.addEventListener("DOMContentLoaded", function () {
+    const englishMenu = document.getElementById("english-menu");
+    const chineseMenu = document.getElementById("chinese-menu");
+
+    // 定义两组数据结构
+    var treeDataEn = {
+    "name": "HUMAN EMBRYONIC(TOTIPOTENT)STEM CELL",
+    "children": [
+        {
+            "name": "Ectoderm",
             "children": [
-              { 
-                "name": "外胚层 Ectoderm",
-                "children": [
-                  { "name": "头颈部上皮细胞Head-Neck-Ep" },
-                  { "name": "多能神经嵴前体Mulltpotent neural crest precursors",
+                { "name": "Head-Neck-Ep" },
+                {
+                    "name": "Mulltpotent neural crest precursors",
                     "children": [
-                      { "name": "黑色素细胞前体Melanocyte precursor",
-                        "children": [{"name": "色素细胞Pigment cells"}]
-                       },
-                      { "name": "神经干细胞Neural Stem Cells",
-                        "children": [{
-                          "name": "神经胶质祖细胞Glial Progenitor",
-                          "children":[{"name": "星形胶质细胞Astrocyte"},
-                          {"name": "少突胶质细胞Oligodendrocyte"
-                          }],
-                      },
-                          {"name": "神经元祖细胞Neuron Progenitor",
-                          "children":[{"name": "神经元Neuron"},
-                          {"name": "神经组织Nerve"}
-                        ]
-                       }],
-                      }]
-                    },
-                    {"name": "角质细胞干细胞/原细胞 Keratinocyte stem/progenit or cells",
-                      "children": [{"name": "角角质细胞表皮细胞 Keratinocyte epidermal skin cells"}]
-                    },
-                    {"name": "内分泌系统 endocrine",
-                    "children":[{
-                      "name": "垂体Pituitary gland",
-                      "children": [{"name": "前叶(腺垂体)Adenohypophysis"}]
-                    },{
-                      "name": "乳腺breast",
-                      "children": [{"name": "乳腺基底上皮细胞Breast-Basal-Ep"},
-                        {"name": "乳腺腔上皮细胞Breast-Luminal-Ep"}
-                      ]
-                    },{
-                      "name": "肾上腺adrenal_gland",
-                    },{
-                      "name": "唾液腺salivary gland",
-                    },
+                        {
+                            "name": "Melanocyte precursor",
+                            "children": [{"name": "Pigment cells"}]
+                        },
+                        {
+                            "name": "Neural Stem Cells",
+                            "children": [
+                                {
+                                    "name": "Glial Progenitor",
+                                    "children": [{"name": "Astrocyte"}, {"name": "Oligodendrocyte"}]
+                                },
+                                {
+                                    "name": "Neuron Progenitor",
+                                    "children": [{"name": "Neuron"}, {"name": "Nerve"}]
+                                }
+                            ]
+                        }
                     ]
-                    }
-                ]
-              },
-              { 
-                "name": "外胚层 Ectoderm",
-                "children": [
-                  { "name": "头颈部上皮细胞Head-Neck-Ep" },
-                  { "name": "多能神经嵴前体Mulltpotent neural crest precursors",
+                },
+                {
+                    "name": "Keratinocyte stem/progenitor cells",
+                    "children": [{"name": "Keratinocyte epidermal skin cells"}]
+                },
+                {
+                    "name": "endocrine",
                     "children": [
-                      { "name": "黑色素细胞前体Melanocyte precursor",
-                        "children": [{"name": "色素细胞Pigment cells"}]
-                       },
-                      { "name": "神经干细胞Neural Stem Cells",
-                        "children": [{
-                          "name": "神经胶质祖细胞Glial Progenitor",
-                          "children":[{"name": "星形胶质细胞Astrocyte"},
-                          {"name": "少突胶质细胞Oligodendrocyte"
-                          }],
-                      },
-                          {"name": "神经元祖细胞Neuron Progenitor",
-                          "children":[{"name": "神经元Neuron"},
-                          {"name": "神经组织Nerve"}
-                        ]
-                       }],
-                      }]
-                    },
-                    {"name": "角质细胞干细胞/原细胞 Keratinocyte stem/progenit or cells",
-                      "children": [{"name": "角角质细胞表皮细胞 Keratinocyte epidermal skin cells"}]
-                    },
-                    {"name": "内分泌系统 endocrine",
-                    "children":[{
-                      "name": "垂体Pituitary gland",
-                      "children": [{"name": "前叶(腺垂体)Adenohypophysis"}]
-                    },{
-                      "name": "乳腺breast",
-                      "children": [{"name": "乳腺基底上皮细胞Breast-Basal-Ep"},
-                        {"name": "乳腺腔上皮细胞Breast-Luminal-Ep"}
-                      ]
-                    },{
-                      "name": "肾上腺adrenal_gland",
-                    },{
-                      "name": "唾液腺salivary gland",
-                    },
+                        {
+                            "name": "Pituitary gland",
+                            "children": [{"name": "Adenohypophysis"}]
+                        },
+                        {
+                            "name": "breast",
+                            "children": [{"name": "Breast-Basal-Ep"}, {"name": "Breast-Luminal-Ep"}]
+                        },
+                        {
+                            "name": "adrenal_gland"
+                        },
+                        {
+                            "name": "salivary gland"
+                        }
                     ]
-                    }
-                ]
-              },
-              { 
-                "name": "外胚层 Ectoderm",
-                "children": [
-                  { "name": "头颈部上皮细胞Head-Neck-Ep" },
-                  { "name": "多能神经嵴前体Mulltpotent neural crest precursors",
-                    "children": [
-                      { "name": "黑色素细胞前体Melanocyte precursor",
-                        "children": [{"name": "色素细胞Pigment cells"}]
-                       },
-                      { "name": "神经干细胞Neural Stem Cells",
-                        "children": [{
-                          "name": "神经胶质祖细胞Glial Progenitor",
-                          "children":[{"name": "星形胶质细胞Astrocyte"},
-                          {"name": "少突胶质细胞Oligodendrocyte"
-                          }],
-                      },
-                          {"name": "神经元祖细胞Neuron Progenitor",
-                          "children":[{"name": "神经元Neuron"},
-                          {"name": "神经组织Nerve"}
-                        ]
-                       }],
-                      }]
-                    },
-                    {"name": "角质细胞干细胞/原细胞 Keratinocyte stem/progenit or cells",
-                      "children": [{"name": "角角质细胞表皮细胞 Keratinocyte epidermal skin cells"}]
-                    },
-                    {"name": "内分泌系统 endocrine",
-                    "children":[{
-                      "name": "垂体Pituitary gland",
-                      "children": [{"name": "前叶(腺垂体)Adenohypophysis"}]
-                    },{
-                      "name": "乳腺breast",
-                      "children": [{"name": "乳腺基底上皮细胞Breast-Basal-Ep"},
-                        {"name": "乳腺腔上皮细胞Breast-Luminal-Ep"}
-                      ]
-                    },{
-                      "name": "肾上腺adrenal_gland",
-                    },{
-                      "name": "唾液腺salivary gland",
-                    },
-                    ]
-                    }
-                ]
-              },
+                }
             ]
-          };
+        },
+        {
+            "name": "Mesoderm",
+            "children": [
+                {
+                    "name": "Mesenchymal stem cells",
+                    "children": [
+                        {"name": "Osteoblasts"},
+                        {"name": "Chondrocytes"},
+                        {"name": "Myocytes"},
+                        {"name": "Smooth Muscle"},
+                        {"name": "Stromal cells"},
+                        {"name": "Lipoblasts/preadipocytes", "children": [{"name": "Adipocytes"}]},
+                        {"name": "spleen"}
+                    ]
+                },
+                {
+                    "name": "Hematopoietic",
+                    "children": [
+                        {
+                            "name": "Myeloid precursor",
+                            "children": [
+                                {"name": "Erythrocytes"},
+                                {
+                                    "name": "Granulocytes",
+                                    "children": [
+                                        {"name": "neutrophil"},
+                                        {"name": "eosinophil"},
+                                        {"name": "basophil"}
+                                    ]
+                                },
+                                {
+                                    "name": "Megakaryocytes",
+                                    "children": [{"name": "Platelets"}]
+                                },
+                                {
+                                    "name": "Monocytes",
+                                    "children": [{"name": "Macrophages"}]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Lymphoid",
+                            "children": [
+                                {"name": "T cells"},
+                                {"name": "B cells"},
+                                {"name": "NK cells"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Endothelial progenitors/stem cells",
+                    "children": [
+                        {"name": "Lymphatic vascular cells"},
+                        {"name": "Arteries, veins"}
+                    ]
+                },
+                {
+                    "name": "Cardiac progenitors",
+                    "children": [
+                        {"name": "Cardiac endothelial cells"},
+                        {"name": "Cardiac conduction cells"}
+                    ]
+                },
+                {
+                    "name": "Reproductive",
+                    "children": [
+                        {
+                            "name": "Gonads",
+                            "children": [
+                                {"name": "Ovary"},
+                                {"name": "Testis"},
+                                {"name": "Uterus"},
+                                {"name": "Vagina"}
+                            ]
+                        },
+                        {
+                            "name": "Fallopian tube"
+                        },
+                        {
+                            "name": "Prostate"
+                        }
+                    ]
+                },
+                {
+                    "name": "Urinary",
+                    "children": [
+                        {"name": "Ureter"},
+                        {"name": "Bladder"},
+                        {"name": "Kidney"}
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Endoderm",
+            "children": [
+                {
+                    "name": "Thyroid progenitors",
+                    "children": [{"name": "Thyroid cells"}]
+                },
+                {
+                    "name": "Multipotent lung precursor cells",
+                    "children": [
+                        {
+                            "name": "Aveolar lung cells",
+                            "children": [{"name": "Lung-Ep-Alveo"}]
+                        },
+                        {
+                            "name": "Tracheo bronchial cells",
+                            "children": [{"name": "Lung-Ep-Bron"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "Digestive",
+                    "children": [
+                        {
+                            "name": "Pancreatic progenitors",
+                            "children": [
+                                {
+                                    "name": "Pancreas",
+                                    "children": [
+                                        {"name": "Pancreas-Acinar"},
+                                        {"name": "Pancreas-Alpha"},
+                                        {"name": "Pancreas-Beta"},
+                                        {"name": "Pancreas-Delta"},
+                                        {"name": "Pancreas Duct"}
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Gut progenitors",
+                            "children": [
+                                {"name": "Gut epithelial cells"},
+                                {"name": "Colon-Ep"},
+                                {"name": "Small-int Ep"}
+                            ]
+                        },
+                        {
+                            "name": "Esophagus"
+                        },
+                        {
+                            "name": "Hepatic progenitors/stem cells",
+                            "children": [{"name": "Hepatocytes"}]
+                        },
+                        {
+                            "name": "Stomach",
+                            "children": [{"name": "Gastric-Ep"}]
+                        }
+                    ]
+                },
+                {
+                    "name": "Thyroid progenitors",
+                    "children": [{"name": "Thyroid cells"}]
+                }
+            ]
+        },
+        {
+            "name": "Primordial Germ cell",
+            "children": [{"name": "Ovum"}, {"name": "Sperm"}]
+        }
+    ]
+};
         
-        // Set the dimensions and margins of the diagram
-        var margin = {top: 20, right: 90, bottom: 30, left: 90},
+var treeDataZh =
+{
+"name": "HUMAN EMBRYONIC(TOTIPOTENT)STEM CELL 人类胚胎全能干细胞",
+"children": [
+{ 
+ "name": "外胚层 Ectoderm",
+ "children": [
+   { "name": "头颈部上皮细胞Head-Neck-Ep" },
+   { "name": "多能神经嵴前体Mulltpotent neural crest precursors",
+     "children": [
+       { "name": "黑色素细胞前体Melanocyte precursor",
+         "children": [{"name": "色素细胞Pigment cells"}]
+        },
+       { "name": "神经干细胞Neural Stem Cells",
+         "children": [{
+           "name": "神经胶质祖细胞Glial Progenitor",
+           "children":[{"name": "星形胶质细胞Astrocyte"},
+           {"name": "少突胶质细胞Oligodendrocyte"
+           }],
+       },
+           {"name": "神经元祖细胞Neuron Progenitor",
+           "children":[{"name": "神经元Neuron"},
+           {"name": "神经组织Nerve"}
+         ]
+        }],
+       }]
+     },
+     {"name": "角质细胞干细胞/原细胞 Keratinocyte stem/progenit or cells",
+       "children": [{"name": "角角质细胞表皮细胞 Keratinocyte epidermal skin cells"}]
+     },
+     {"name": "内分泌系统 endocrine",
+     "children":[{
+       "name": "垂体Pituitary gland",
+       "children": [{"name": "前叶(腺垂体)Adenohypophysis"}]
+     },{
+       "name": "乳腺breast",
+       "children": [{"name": "乳腺基底上皮细胞Breast-Basal-Ep"},
+         {"name": "乳腺腔上皮细胞Breast-Luminal-Ep"}
+       ]
+     },{
+       "name": "肾上腺adrenal_gland",
+     },{
+       "name": "唾液腺salivary gland",
+     },
+     ]
+     }
+ ]
+},
+{ 
+ "name": "中胚层 Ectoderm",
+ "children": [
+   { "name": "间充质干细胞Mesenchymal stem cells",
+     "children": [
+         {"name":"成骨细胞Osteoblasts"},
+         {"name":"软骨细胞Chondrocytes"},
+         {"name":"肌细胞Myocytes"},
+         {"name":"平滑肌Smooth Muscle"},
+         {"name":"基质细胞Stromal cells"},
+         {"name":"脂肪母细胞/前脂肪细胞Lipoblasts/preadipocytes", 
+             "children": [{"name": "脂肪细胞Adipocytes"}]
+         },
+         {"name":"脾脏spleen"},
+     ]
+    },
+   { "name": "造血干细胞Hematopoletic",
+     "children": [
+       { "name": "髓系前体Myeloid precursor",
+         "children": [
+         {"name": "红细胞Erythrocytes"},
+         {"name": "粒细胞Granulocytes",
+             "children": [
+                 {"name": "中性粒细胞neutrophil"},
+                 {"name": "嗜酸性粒细胞eosinophil"},
+                 {"name": "嗜碱性粒细胞basophil"},
+             ]
+         },
+         {"name": "巨核细胞Megakaryocytes",
+             "children":[{"name": "血小板Platelets"}]
+         },
+         {"name": "单核细胞Monocytes", 
+             "children": [{"name": "巨噬细胞Macrophages"}]
+         },
+         ]
+        },
+       { "name": "淋巴系前体Lymphoid",
+         "children": [
+             {"name": "T细胞 T cells",},
+             {"name": "B细胞 B cells",},
+             {"name": "NK细胞 NK cells",},
+         ],
+       }]
+     },
+     {"name": "内皮祖细胞或干细胞Endothelial progenitors/stem cells",
+       "children": [{"name": "淋巴血管细胞Lymphatic vascular cells"},
+         {"name": "动脉，静脉Arteries, veins"}
+       ]
+     },
+     {"name": "心肌祖细胞cardlac progenitors",
+     "children":[{
+       "name": "心脏内皮细胞Cardiac endothelial cells",
+     },{
+       "name": "心脏传导细胞Cardiac conduction cells",
+     },
+     ]
+     },
+     {"name":"生殖reproductive",
+         "children": [
+             {"name": "性腺Gonads",
+                 "children": [
+                     {"name": "Ovary 卵巢",
+                         "children": [{"name": "卵巢和子宫内膜上皮细胞Ovary+Endom-EP" }]
+                     },
+                     {"name": "睾丸 Testis"},
+                     {"name": "子宫 Uterus",
+                     "children": [{"name": "子宫颈cervix_uteri" }]
+                     },
+                     {"name": "阴道 Vagina"},
+                 ]
+             },
+             {"name": "输卵管Fallopian tube",
+             "children": [{"name": "输卵管上皮细胞Fallopian-Ep" }]                        
+             },
+             {"name": "前列腺Prostate",
+             "children": [{"name": "前列腺上皮细胞前列腺Prostate-Ep" }]
+             },
+         ]
+     },
+     {"name":"泌尿系统Urinary",
+         "children": [
+             {"name": "输尿管ureter"},
+             {"name": "膀胱Bladder",
+                 "children":[{"name":"膀胱上皮细胞Bladder-Ep"}]
+             },
+             {"name": "肾Kidney",
+                 "children":[{"name": "膀胱上皮细胞Bladder-Ep"}]
+             },
+         ]
+     },
+ ]
+},
+{ 
+ "name": "内胚层 Endoderm",
+ "children": [
+   { "name": "甲状腺祖细胞甲状腺细胞Thyroid progenitors",
+     "children": [{"name": "甲状腺细胞Thyroid cells"}]
+    },
+   { "name": "多能性肺前体细胞Multipotent lung precursor cells",
+     "children": [
+       { "name": "肺泡肺细胞Aveolar lung cells",
+         "children": [{"name": "肺泡上皮细胞Lung-Ep-Alveo"}]
+        },
+       { "name": "气管-支气管细胞Tracheo bronchial cells",
+         "children": [{
+           "name": "支气管上皮细胞Lung-Ep-Bron",
+       }],
+  }]
+     },
+     {"name": "消化系统digestive",
+       "children": [{"name": "胰腺前体细胞Pancreatic progenitors",
+         "children": [{
+           "name": "胰腺Pancreas",
+           "children": [
+           {"name": "胰腺腺泡细胞Pancreas-Acinar"},
+           {"name": "胰腺α细胞Pancreas-Alpha"},
+           {"name": "胰腺β细胞Pancreas-Beta"},
+           {"name": "胰腺S细胞Pancreas-Delta"},
+           {"name": "胰腺导管细胞Pancreas Duct"},
+           ]
+         }]
+       },
+         {"name": "肠道前体细胞Gut progenitors",
+           "children":[
+         {"name": "肠上皮细胞Gut epithelial cells"},
+         {"name": "肠上皮细胞Colon-Ep"},
+         {"name": "小肠上皮细胞Small-int Ep"},
+           ]
+         },
+         {"name": "食管Esophagus"},
+         {"name": "肝脏前体细胞/于细胞Hepatic progenitors/stem cells",
+           "children": [{ "name" :"肝细胞Hepatocytes(Fliver)"}]
+         },
+         {"name": "胃stom/Gastric",
+           "children": [{"name": "胃上皮细胞Gastric-Ep"}]
+         },
+       ]
+     },
+     {"name": "甲状腺祖细胞Thyroid progenitors",
+     "children":[{
+       "name": "甲状腺细胞Thyroid cells",
+     }]
+     }
+ ]
+},
+{"name":"原始生殖细胞Primordial Germ cell",
+ "children": [{"name": "卵子Ovum"},
+   {"name": "精子Sperm"}
+ ]
+}
+]
+};
+  
+
+    // 默认显示英文菜单
+    englishMenu.style.display = "block";
+    chineseMenu.style.display = "none";
+
+    // 初始化 D3.js 可视化
+    let treeData = treeDataEn; // 默认使用英文数据
+    initD3Visualization(treeData);
+
+    // 监听菜单项点击事件
+    document.addEventListener("click", function (event) {
+        const target = event.target;
+
+        // 如果点击的是菜单项（<a>标签），切换语言
+        if (target.classList.contains("dropdown-item")) {
+            event.preventDefault(); // 阻止<a>的默认行为
+            const lang = target.dataset.lang;
+
+            // 根据语言切换菜单和数据
+            if (lang === "en") {
+                englishMenu.style.display = "block";
+                chineseMenu.style.display = "none";
+                treeData = treeDataEn; // 切换到英文数据
+            } else if (lang === "zh") {
+                englishMenu.style.display = "none";
+                chineseMenu.style.display = "block";
+                treeData = treeDataZh; // 切换到中文数据
+            }
+
+            // 重新初始化 D3.js 可视化
+            initD3Visualization(treeData);
+        }
+    });
+
+    // 初始化 D3.js 可视化的函数
+    function initD3Visualization(data) {
+        // 清空之前的 SVG 内容
+        d3.select("#treeBody svg").remove();
+
+        // 设置图表的尺寸和边距
+        var margin = { top: 20, right: 90, bottom: 30, left: 90 },
             width = 1360 - margin.left - margin.right,
             height = 1000 - margin.top - margin.bottom;
-        
-        // append the svg object to the body of the page
-        // appends a 'group' element to 'svg'
-        // moves the 'group' element to the top left margin
+
+        // 将 SVG 对象附加到页面的 #treeBody
         var svg = d3.select("#treeBody").append("svg")
             .attr("width", width + margin.right + margin.left)
             .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-            .attr("transform", "translate("
-                  + margin.left + "," + margin.top + ")");
-        
-        var i = 0
-        var duration = 750,
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var i = 0,
+            duration = 750,
             root;
-        
-        // declares a tree layout and assigns the size
+
+        // 声明树布局并分配大小
         var treemap = d3.tree().size([height, width]);
-        
-        // Assigns parent, children, height, depth
-        root = d3.hierarchy(treeData, function(d) { return d.children; });
+
+        // 分配父节点、子节点、高度、深度
+        root = d3.hierarchy(data, function (d) { return d.children; });
         root.x0 = height / 2;
         root.y0 = 0;
-        // Collapse after the second level
-        //默认折叠的地方
-        // root.children.forEach(collapse);
-        
+
+        // 更新树布局
         update(root);
-        
-        // Collapse the node and all it's children
+
+        // 折叠节点及其所有子节点
         function collapse(d) {
-          if(d.children) {
-            d._children = d.children
-            d._children.forEach(collapse)
-            d.children = null
-          }
-        }
-        
-        function update(source) {
-        
-          // Assigns the x and y position for the nodes
-          var treeData = treemap(root);
-        
-          // Compute the new tree layout.
-          var nodes = treeData.descendants(),
-              links = treeData.descendants().slice(1);
-        
-          // Normalize for fixed-depth.
-          nodes.forEach(function(d){ d.y = d.depth * 150});
-        
-          // ****************** Nodes section ***************************
-        
-          // Update the nodes...
-          var node = svg.selectAll('g.node')
-              .data(nodes, function(d) {return d.id || (d.id = ++i); });
-        
-          // Enter any new modes at the parent's previous position.
-          var nodeEnter = node.enter().append('g')
-              .attr('class', 'node')
-              .attr("transform", function(d) {
-                return "translate(" + source.y0 + "," + source.x0 + ")";
-            })
-            .on('click', click);
-        
-          // Add Circle for the nodes
-          nodeEnter.append('circle')
-              .attr('class', 'node')
-              .attr('r', 1e-6)
-              .style("fill", function(d) {
-                  return d._children ? "lightgreen" : "#fff";
-              });
-        
-          // Add labels for the nodes
-          nodeEnter.append('text')
-              .attr("dy", ".35em")
-              .attr("x", function(d) {
-                  return d.children || d._children ? -13 : 13;
-              })
-              .attr("text-anchor", function(d) {
-                  return d.children || d._children ? "end" : "start";
-              })
-              .text(function(d) { return d.data.name; });
-        
-          // UPDATE
-          var nodeUpdate = nodeEnter.merge(node);
-        
-          // Transition to the proper position for the node
-          nodeUpdate.transition()
-            .duration(duration)
-            .attr("transform", function(d) { 
-                return "translate(" + d.y + "," + d.x + ")";
-             });
-        
-          // Update the node attributes and style
-          nodeUpdate.select('circle.node')
-            .attr('r', 10)
-            .style("fill", function(d) {
-                return d._children ? "lightgreen" : "#fff";
-            })
-            .attr('cursor', 'pointer');
-        
-        
-          // Remove any exiting nodes
-          var nodeExit = node.exit().transition()
-              .duration(duration)
-              .attr("transform", function(d) {
-                  return "translate(" + source.y + "," + source.x + ")";
-              })
-              .remove();
-        
-          // On exit reduce the node circles size to 0
-          nodeExit.select('circle')
-            .attr('r', 1e-6);
-        
-          // On exit reduce the opacity of text labels
-          nodeExit.select('text')
-            .style('fill-opacity', 1e-6);
-        
-          // ****************** links section ***************************
-        
-          // Update the links...
-          var link = svg.selectAll('path.link')
-              .data(links, function(d) { return d.id; });
-        
-          // Enter any new links at the parent's previous position.
-          var linkEnter = link.enter().insert('path', "g")
-              .attr("class", "link")
-              .attr('d', function(d){
-                var o = {x: source.x0, y: source.y0}
-                return diagonal(o, o)
-              });
-        
-          // UPDATE
-          var linkUpdate = linkEnter.merge(link);
-        
-          // Transition back to the parent element position
-          linkUpdate.transition()
-              .duration(duration)
-              .attr('d', function(d){ return diagonal(d, d.parent) });
-        
-          // Remove any exiting links
-          var linkExit = link.exit().transition()
-              .duration(duration)
-              .attr('d', function(d) {
-                var o = {x: source.x, y: source.y}
-                return diagonal(o, o)
-              })
-              .remove();
-        
-          // Store the old positions for transition.
-          nodes.forEach(function(d){
-            d.x0 = d.x;
-            d.y0 = d.y;
-          });
-        
-          // Creates a curved (diagonal) path from parent to the child nodes
-          function diagonal(s, d) {
-        
-            path = `M ${s.y} ${s.x}
-                    C ${(s.y + d.y) / 2} ${s.x},
-                      ${(s.y + d.y) / 2} ${d.x},
-                      ${d.y} ${d.x}`
-        
-            return path
-          }
-        
-          // Toggle children on click.
-          function click(d) {
-            console.log("Before click: ", d);
             if (d.children) {
                 d._children = d.children;
-                // collapse(d); // 调用 collapse 函数隐藏子节点
+                d._children.forEach(collapse);
                 d.children = null;
-            } else {
-                // collapse(d); // 调用 collapse 函数隐藏子节点
-        
-                d.children = d._children;
-                d._children = null;
             }
-            console.log("After click: ", d);
-            console.log(root);
-            
-            update(d);
         }
-        
-        
+
+        // 更新树布局的函数
+        function update(source) {
+            // 分配节点的 x 和 y 位置
+            var treeData = treemap(root);
+
+            // 计算新的树布局
+            var nodes = treeData.descendants(),
+                links = treeData.descendants().slice(1);
+
+            // 标准化固定深度
+            nodes.forEach(function (d) { d.y = d.depth * 150; });
+
+            // ****************** 节点部分 ***************************
+
+            // 更新节点
+            var node = svg.selectAll('g.node')
+                .data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+            // 添加新节点
+            var nodeEnter = node.enter().append('g')
+                .attr('class', 'node')
+                .attr("transform", function (d) {
+                    return "translate(" + source.y0 + "," + source.x0 + ")";
+                })
+                .on('click', click);
+
+            // 添加节点的圆形
+            nodeEnter.append('circle')
+                .attr('class', 'node')
+                .attr('r', 1e-6)
+                .style("fill", function (d) {
+                    return d._children ? "lightgreen" : "#fff";
+                });
+
+            // 添加节点的文本标签
+            nodeEnter.append('text')
+                .attr("dy", ".35em")
+                .attr("x", function (d) {
+                    return d.children || d._children ? -13 : 13;
+                })
+                .attr("text-anchor", function (d) {
+                    return d.children || d._children ? "end" : "start";
+                })
+                .text(function (d) { return d.data.name; });
+
+            // 合并新节点和旧节点
+            var nodeUpdate = nodeEnter.merge(node);
+
+            // 节点过渡到正确的位置
+            nodeUpdate.transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + d.y + "," + d.x + ")";
+                });
+
+            // 更新节点属性和样式
+            nodeUpdate.select('circle.node')
+                .attr('r', 10)
+                .style("fill", function (d) {
+                    return d._children ? "lightgreen" : "#fff";
+                })
+                .attr('cursor', 'pointer');
+
+            // 移除退出的节点
+            var nodeExit = node.exit().transition()
+                .duration(duration)
+                .attr("transform", function (d) {
+                    return "translate(" + source.y + "," + source.x + ")";
+                })
+                .remove();
+
+            // 退出时将节点圆圈的大小减少到 0
+            nodeExit.select('circle')
+                .attr('r', 1e-6);
+
+            // 退出时将文本标签的透明度减少到 0
+            nodeExit.select('text')
+                .style('fill-opacity', 1e-6);
+
+            // ****************** 链接部分 ***************************
+
+            // 更新链接
+            var link = svg.selectAll('path.link')
+                .data(links, function (d) { return d.id; });
+
+            // 添加新链接
+            var linkEnter = link.enter().insert('path', "g")
+                .attr("class", "link")
+                .attr('d', function (d) {
+                    var o = { x: source.x0, y: source.y0 };
+                    return diagonal(o, o);
+                });
+
+            // 合并新链接和旧链接
+            var linkUpdate = linkEnter.merge(link);
+
+            // 链接过渡回父元素位置
+            linkUpdate.transition()
+                .duration(duration)
+                .attr('d', function (d) { return diagonal(d, d.parent); });
+
+            // 移除退出的链接
+            var linkExit = link.exit().transition()
+                .duration(duration)
+                .attr('d', function (d) {
+                    var o = { x: source.x, y: source.y };
+                    return diagonal(o, o);
+                })
+                .remove();
+
+            // 存储旧位置以便过渡
+            nodes.forEach(function (d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+
+            // 创建从父节点到子节点的曲线（对角线）路径
+            function diagonal(s, d) {
+                path = `M ${s.y} ${s.x}
+                        C ${(s.y + d.y) / 2} ${s.x},
+                          ${(s.y + d.y) / 2} ${d.x},
+                          ${d.y} ${d.x}`;
+                return path;
+            }
+
+            // 点击切换子节点
+            function click(d) {
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+                update(d);
+            }
         }
-            </script>
+    }
+});
+        </script>
 </body></html>
