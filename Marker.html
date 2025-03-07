@@ -1,13 +1,11 @@
-<!DOCTYPE html><html class="no-js" lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Artom - Modern &amp; Multipurpose HTML Template</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-    <!-- Place favicon.ico in the root directory -->
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- CSS here -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.min.css">
@@ -21,345 +19,525 @@
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    
-    
+    <link rel="stylesheet" href="plugins/datatable/css/dataTables.bootstrap5.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <!-- 按钮样式 -->
+    <style>
+      /* 自定义按钮基础样式 */
+      .tailwind-button {
+          @apply px-4 py-2 rounded-lg transition-colors duration-200 ease-in-out 
+                 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 
+                 focus:ring-blue-500 flex items-center;
+          width: 80px;
+          height: 30px;
+          margin-top: 20px;
+          border-radius: 10%;
+          border-width: 2px;
+          border-style: solid;
+          border-color:white
+      }
+  
+      /* 搜索输入框扩展样式 */
+      .tailwind-search-input {
+          @apply w-full md:w-64 transition duration-300;
+      }
+  
+      /* 分页按钮样式 */
+      .dataTables_wrapper .paginate_button {
+          @apply px-3 py-1 rounded-md transition-colors duration-200 ease-in-out
+                 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50
+                 focus:outline-none focus:ring-2 focus:ring-blue-500;
+      }
+  
+      /* 当前分页样式 */
+      .dataTables_wrapper .current {
+          @apply bg-blue-500 text-white border-blue-500 hover:bg-blue-600;
+      }
+
+      /* 添加表格滚动样式 */
+.dataTables_scrollBody {
+    overflow-x: auto !important;
+}
+
+/* 固定表头样式 */
+.dataTables_scrollHeadInner {
+    width: 100% !important;
+}
+
+.min-width-120 {
+    min-width: 120px;
+}
+  </style>
+
+  <!-- 树形结构样式 -->
+  <style type="text/css">
+    * { padding: 0; margin: 0; font-family: "microsoft yahei"; }
+    ul li { list-style-type: none; }
+    .box { width: 200px; }
+    ul { margin-left: 20px; }
+    .menuUl li { margin: 10px 0; }
+    .menuUl li span:hover { text-decoration: underline; cursor: pointer; }
+    .menuUl li i { margin-right: 10px; top: 0px; cursor: pointer; color: #161616; }
+
+    
+    * { padding: 0; margin: 0; font-family: "microsoft yahei"; }
+    ul li { list-style-type: none; position: relative; }
+    
+    /* 新增树形结构容器样式 */
+    .tree-container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 4px;
+        width: 600px;
+    }
+
+    /* 连接线样式 */
+    ul {
+        margin-left: 20px;
+    }
+    ul li::before {
+        content: '';
+        position: absolute;
+        left: -15px;
+        top: 0;
+        width: 15px;
+        height: 100%;
+        border-left: 1px solid #ccc;
+    }
+    ul li::after {
+        content: '';
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        width: 15px;
+        border-bottom: 1px solid #ccc;
+    }
+    ul li:last-child::before {
+        height: 50%;
+    }
+    
+    /* 图标位置调整 */
+    .menuUl li i {
+        margin-left: 5px;
+        position: relative;
+        z-index: 1;
+        background: white;
+        padding-right: 3px;
+    }
+    
+    /* 根节点特殊处理 */
+    ul:first-child > li::before,
+    ul:first-child > li::after {
+        border: 0 !important;
+    }
+</style>
 
 </head>
+
 <body data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0">
 
-    <!-- preloader -->
-    <div id="preloader" style="opacity: 0.9969804777275899;">
-        <div id="loading-center">
-            <div class="loader">
-                <div class="loader-outter"></div>
-                <div class="loader-inner"></div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader-end -->
-
-    <!-- Scroll-top -->
-    <button class="scroll-top scroll-to-target" data-target="html">
-        <i class="fas fa-angle-up"></i>
-    </button>
-    <!-- Scroll-top-end-->
-
-    <!-- header-area -->
-    <header>
-        
-        <div id="sticky-header" class="main-header menu-area">
-            <div class="container custom-container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
-                        <div class="menu-wrap">
-                            <nav class="menu-nav show">
-                                <div class="logo">
-                                    <img src="img/self/cell1.png" alt="" style="width: 90px;">
-                                </div>
-                                <h1 style="margin-left: 18px;margin-top: 15px;font-size: 40px;">CellMarker</h1>
-                                <div class="navbar-wrap main-menu d-none d-lg-flex">
-                                    <ul class="navigation">
-                                        <li class="menu-item-has-children"><a href="#">Home</a>
-                                            <ul class="submenu">
-                                                <li ><a href="index.html">Knowledge Base</a></li>
-                                                <li><a href="index-2.html">Home Software</a></li>
-                                                <li><a href="index-3.html">Home Consulting</a></li>
-                                            </ul>
-                                        <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                        <li class="active"><a href="Marker.html">Markers</a></li>
-                                        <li class="menu-item-has-children"><a href="#">Download</a>
-                                            <ul class="submenu">
-                                                <li><a href="services.html">Our Services</a></li>
-                                                <li><a href="services-details.html">Services Details</a></li>
-                                            </ul>
-                                        <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                        <li class="menu-item-has-children"><a href="#">Toos</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Our Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                        <li><a href="contact.html">contacts</a></li>
-                                    </ul>
-                                </div>
-                                <div class="header-action d-none d-md-block">
-                                    <ul>
-                                        <li class="header-search"><a href="#"><i class="flaticon-search-magnifier-outline"></i></a></li>
-                                        <li class="header-btn"><a href="contact.html" class="btn" style="background-color: rgb(97, 83, 252)">Get A Quote <span></span></a></li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <!-- Mobile Menu  -->
-                        <div class="mobile-menu">
-                            <nav class="menu-box">
-                                <div class="close-btn"><i class="fas fa-times"></i></div>
-                                <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
-                                </div>
-                                <div class="menu-outer">
-                                    <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-                                
-                                    <ul class="navigation">
-                                        <li class="active menu-item-has-children"><a href="#">Home</a>
-                                            <ul class="submenu">
-                                                <li class="active"><a href="index.html">Knowledge Base</a></li>
-                                                <li><a href="index-2.html">Home Software</a></li>
-                                                <li><a href="index-3.html">Home Consulting</a></li>
-                                            </ul>
-                                        <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                        <li><a href="about-us.html">Company</a></li>
-                                        <li class="menu-item-has-children"><a href="#">Services</a>
-                                            <ul class="submenu">
-                                                <li><a href="services.html">Our Services</a></li>
-                                                <li><a href="services-details.html">Services Details</a></li>
-                                            </ul>
-                                        <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                        <li class="menu-item-has-children"><a href="#">News</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Our Blog</a></li>
-                                                <li><a href="blog-details.html">Blog Details</a></li>
-                                            </ul>
-                                        <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
-                                        <li><a href="contact.html">contacts</a></li>
-                                    </ul>
-                                </div>
-                                <div class="social-links">
-                                    <ul class="clearfix">
-                                        <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                        <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
-                                        <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                                        <li><a href="#"><span class="fab fa-instagram"></span></a></li>
-                                        <li><a href="#"><span class="fab fa-youtube"></span></a></li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="menu-backdrop"></div>
-                        <!-- End Mobile Menu -->
-                    </div>
+        <!-- preloader -->
+        <div id="preloader" style="opacity: 0.9969804777275899;">
+            <div id="loading-center">
+                <div class="loader">
+                    <div class="loader-outter"></div>
+                    <div class="loader-inner"></div>
                 </div>
             </div>
         </div>
-        <!-- header-search -->
-        <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="search-close">
-                <span><i class="fas fa-times"></i></span>
-            </div>
-            <div class="search-wrap text-center">
-                <div class="container">
+        <!-- preloader-end -->
+    
+        <!-- Scroll-top -->
+        <button class="scroll-top scroll-to-target" data-target="html">
+            <i class="fas fa-angle-up"></i>
+        </button>
+        <!-- Scroll-top-end-->
+    
+        <!-- header-area -->
+        <header>
+            
+            <div id="sticky-header" class="main-header menu-area">
+                <div class="container custom-container">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="title">... Search Here ...</h2>
-                            <div class="search-form">
-                                <form action="#">
-                                    <input type="text" name="search" placeholder="Type keywords here">
-                                    <button class="search-btn"><i class="fas fa-search"></i></button>
-                                </form>
+                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                            <div class="menu-wrap">
+                                <nav class="menu-nav show">
+                                    <div class="logo">
+                                        <img src="img/self/cell1.png" alt="" style="width: 90px;">
+                                    </div>
+                                    <h1 style="margin-left: 18px;margin-top: 15px;font-size: 40px;">CellMarker</h1>
+                                    <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                        <ul class="navigation">
+                                            <li class="menu-item-has-children"><a href="#">Home</a>
+                                                <ul class="submenu">
+                                                    <li ><a href="index.html">Knowledge Base</a></li>
+                                                    <li><a href="index-2.html">Home Software</a></li>
+                                                    <li><a href="index-3.html">Home Consulting</a></li>
+                                                </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
+                                            <li class=""><a href="Samples.html">Samples</a></li>
+                                            <li class="active"><a href="Marker.html">Markers</a></li>
+                                            <li class="menu-item-has-children"><a href="#">Download</a>
+                                                <ul class="submenu">
+                                                    <li><a href="services.html">Our Services</a></li>
+                                                    <li><a href="services-details.html">Services Details</a></li>
+                                                </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
+                                            <li class="menu-item-has-children"><a href="#">Toos</a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">Our Blog</a></li>
+                                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                                </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
+                                            <li><a href="contact.html">contacts</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="header-action d-none d-md-block">
+                                        <ul>
+                                            <li class="header-search"><a href="#"><i class="flaticon-search-magnifier-outline"></i></a></li>
+                                            <li class="header-btn"><a href="contact.html" class="btn" style="background-color: rgb(97, 83, 252)">Get A Quote <span></span></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
+                            <!-- Mobile Menu  -->
+                            <div class="mobile-menu">
+                                <nav class="menu-box">
+                                    <div class="close-btn"><i class="fas fa-times"></i></div>
+                                    <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
+                                    </div>
+                                    <div class="menu-outer">
+                                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                    
+                                        <ul class="navigation">
+                                            <li class="active menu-item-has-children"><a href="#">Home</a>
+                                                <ul class="submenu">
+                                                    <li class="active"><a href="index.html">Knowledge Base</a></li>
+                                                    <li><a href="index-2.html">Home Software</a></li>
+                                                    <li><a href="index-3.html">Home Consulting</a></li>
+                                                </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
+                                            <li><a href="about-us.html">Company</a></li>
+                                            <li class="menu-item-has-children"><a href="#">Services</a>
+                                                <ul class="submenu">
+                                                    <li><a href="services.html">Our Services</a></li>
+                                                    <li><a href="services-details.html">Services Details</a></li>
+                                                </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
+                                            <li class="menu-item-has-children"><a href="#">News</a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">Our Blog</a></li>
+                                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                                </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div></li>
+                                            <li><a href="contact.html">contacts</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="social-links">
+                                        <ul class="clearfix">
+                                            <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-instagram"></span></a></li>
+                                            <li><a href="#"><span class="fab fa-youtube"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="menu-backdrop"></div>
+                            <!-- End Mobile Menu -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- header-search-end -->
-    </header>
-    <!-- header-area-end -->
-
-    <!-- main-area -->
-    <main>
-
-        <!-- 分页控制 -->
-        <div class="flex flex-wrap justify-between items-center mb-4 gap-4" style="margin-top: 15px;margin-left: 200px;">
-            <!-- 分页按钮组 -->
-            <div class="flex items-center gap-x-2">
-                <button id="prevPage" 
-                        class="px-4 py-2 border border-gray-300 text-gray-700 font-medium text-sm rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent transition-colors"
-                        disabled>
-                    &laquo; Previous
-                </button>
-                
-                <span id="currentPage" 
-                    class="px-4 py-2 bg-gray-100 border border-gray-300 text-gray-600 text-sm font-medium rounded-md">
-                    Page 1
-                </span>
-                
-                <button id="nextPage" 
-                        class="px-4 py-2 border border-gray-300 text-gray-700 font-medium text-sm rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-                    Next &raquo;
-                </button>
-            </div>
-
-            <!-- 分页大小选择 -->
-            <div class="flex items-center gap-x-2 text-sm text-gray-600" style="margin-right: 200px;">
-                Show
-                <select id="pageSize" 
-                        class="pl-3 pr-10 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer">
-                    <option value="5">5</option>
-                    <option value="10" selected>10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select>
-                entries
-            </div>
-        </div>
-        <!-- 图表展示区 -->
-        <div class="container mt-4">
-            <h2 style="font-size: 30px;">Sample Data</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Sample ID</th>
-                            <th>Series</th>
-                            <th>Group</th>
-                            <th>Cell Tissue Type</th>
-                            <th>Detail</th>
-                            <th>Source</th>
-                            <th>Medical Condition</th>
-                            <th>Experimental Method</th>
-                        </tr>
-                    </thead>
-                    <tbody id="sampleTableBody">
-                        <!-- 数据将通过JavaScript动态插入 -->
-                    </tbody>
-                </table>
-            </div>
-        <!-- features-area-end -->
-
-
-
-        <!-- services-area -->
-        <section class="kb-services-area">
-            <div class="container">
-                <div class="container-inner-wrap">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-6 col-lg-8">
-                            <div class="kb-section-title text-center mb-55">
-                                <h2 class="title">Choose Your Support Online</h2>
-                                <p>Get the latest Services and breaking news from Worald around the globe news</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                            <div class="kb-services-item">
-                                <a href="services-details.html" class="kb-services-link"></a>
-                                <div class="icon"><i class="flaticon-money-growth"></i></div>
-                                <div class="content">
-                                    <h5>Knowledge Base<span class="new">NEW</span></h5>
-                                    <p>Knowledge base that organized collection system</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                            <div class="kb-services-item">
-                                <a href="services-details.html" class="kb-services-link"></a>
-                                <div class="icon"><i class="flaticon-credit-card"></i></div>
-                                <div class="content">
-                                    <h5>Customer 360</h5>
-                                    <p>Knowledge base that organized collection system</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                            <div class="kb-services-item">
-                                <a href="services-details.html" class="kb-services-link"></a>
-                                <div class="icon"><i class="flaticon-bank"></i></div>
-                                <div class="content">
-                                    <h5>Task and Alerts</h5>
-                                    <p>Knowledge base that organized collection system</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                            <div class="kb-services-item">
-                                <a href="services-details.html" class="kb-services-link"></a>
-                                <div class="icon"><i class="flaticon-clutch-disc"></i></div>
-                                <div class="content">
-                                    <h5>Automation</h5>
-                                    <p>Knowledge base that organized collection system</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                            <div class="kb-services-item">
-                                <a href="services-details.html" class="kb-services-link"></a>
-                                <div class="icon"><i class="flaticon-idea"></i></div>
-                                <div class="content">
-                                    <h5>Database Software<span class="new">NEW</span></h5>
-                                    <p>Knowledge base that organized collection system</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
-                            <div class="kb-services-item">
-                                <a href="services-details.html" class="kb-services-link"></a>
-                                <div class="icon"><i class="flaticon-online-service"></i></div>
-                                <div class="content">
-                                    <h5>Articles</h5>
-                                    <p>Knowledge base that organized collection system</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- header-search -->
+            <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="search-close">
+                    <span><i class="fas fa-times"></i></span>
                 </div>
-            </div>
-        </section>
-        <!-- services-area-emd -->
-
-        <!-- trial-area -->
-        <section class="trial-area">
-            <div class="container">
-                <div class="container-inner-wrap">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="kb-trial-wrap">
-                                <h2 class="title">Are you ready to get your business grossing</h2>
-                                <div class="kb-trial-form" style="background-color: rgb(97, 83, 252);color: blue;">
+                <div class="search-wrap text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="title">... Search Here ...</h2>
+                                <div class="search-form">
                                     <form action="#">
-                                        <input type="email" placeholder="Email address">
-                                        <button class="btn">14-day Free Trial <span></span></button>
+                                        <input type="text" name="search" placeholder="Type keywords here">
+                                        <button class="search-btn"><i class="fas fa-search"></i></button>
                                     </form>
                                 </div>
-                                <img src="img/images/trial_shape01.png" alt="" class="trial-shape top-shape wow fadeInDownBig" data-wow-delay=".3s" style="visibility: hidden; animation-delay: 0.3s; animation-name: none;">
-                                <img src="img/images/trial_shape02.png" alt="" class="trial-shape bottom-shape wow fadeInUpBig" data-wow-delay=".3s" style="visibility: hidden; animation-delay: 0.3s; animation-name: none;">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- trial-area-end -->
-
-        <!-- online-support-area -->
-        <section class="online-support-area">
-            <div class="container">
-                <div class="container-inner-wrap">
-                    <div class="row align-items-center">
-                        <div class="col-lg-5">
-                            <div class="online-support-img">
-                                <img src="img/images/support_img.png" alt="">
+            <!-- header-search-end -->
+        </header>
+        <!-- header-area-end -->
+    
+        <!-- main-area -->
+        <main>
+    
+            
+            <!-- 图表展示区 -->
+<!-- 在表格上方添加控制面板 -->
+<div class="container mt-4">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Genomic Marker Data</h2>
+    
+   <!-- 修改后的控制面板 -->
+  <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+      <!-- 主内容区 -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <!-- 左侧：树形结构 (占2/3宽度) -->
+          <div class="lg:col-span-2">
+              <div class="tree-container">
+                  <div class="innerUl"></div>
+              </div>
+          </div>
+  
+          <!-- 右侧：过滤控制 (占1/3宽度) -->
+          <div class="space-y-4">
+              <!-- 细胞类型下拉选择 -->
+              <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Cell Type</label>
+                  <select id="cellTypeFilter" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <option value="ALL">All Types</option>
+                      <option value="Adipose">Adipose</option>
+                      <option value="Liver">Liver</option>
+                      <option value="Brain">Brain</option>
+                  </select>
+              </div>
+  
+              <!-- 实验方法按钮 -->
+              <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Method</label>
+                  <div class="grid grid-cols-3 gap-2">
+                      <button data-method="ALL" class="filter-method active px-2 py-1 rounded-md bg-blue-100 text-blue-800">ALL</button>
+                      <button data-method="RRBS" class="filter-method px-2 py-1 rounded-md bg-gray-100 text-gray-700">RRBS</button>
+                      <button data-method="WGBS" class="filter-method px-2 py-1 rounded-md bg-gray-100 text-gray-700">WGBS</button>
+                  </div>
+              </div>
+  
+              <!-- 过滤面板开关 -->
+              <div>
+                  <button id="toggleFilterPanel" class="w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md">
+                      <i class="fas fa-filter mr-2"></i>Advanced Filters
+                  </button>
+              </div>
+          </div>
+      </div>
+  
+      <!-- 高级过滤面板 (全宽) -->
+      <div id="filterPanel" class="hidden mt-4 p-4 border rounded-lg">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div>
+                  <label class="text-sm">Chromosome</label>
+                  <input type="text" id="filterSeqnames" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+              <div>
+                  <label class="text-sm">Start Range</label>
+                  <input type="number" id="filterStart" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+              <div>
+                  <label class="text-sm">End Range</label>
+                  <input type="number" id="filterEnd" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+              <div>
+                  <label class="text-sm">Width</label>
+                  <input type="number" id="filterWidth" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+              <div>
+                  <label class="text-sm">Start CpG</label>
+                  <input type="number" id="filterStartCpG" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+              <div>
+                  <label class="text-sm">End CpG</label>
+                  <input type="number" id="filterEndCpG" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+              <div>
+                  <label class="text-sm">Tg Mean</label>
+                  <input type="number" step="0.001" id="filterTgMean" class="w-full border rounded px-2 py-1 text-sm">
+              </div>
+          </div>
+      </div>
+  </div>
+    </div>
+  
+    <!-- 表格容器 -->
+    <div class="table-responsive">
+        <table id="markerTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>region</th>
+                    <th>seqnames</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Target</th>
+                    <th>direction</th>
+                    <th>Width</th>
+                    <th>StartCpG</th>
+                    <th>EndCpG</th>
+                    <th>LenCpG</th>
+                    <th>bp</th>
+                    <th>Tg_mean</th>
+                    <th>Bg_mean</th>
+                    <th>Delta_mean</th>
+                    <th>Delta_quants</th>
+                    <th>Delta_maxmin</th>
+                    <th>ttest</th>
+                    <th>annotation</th>
+                    <th>geneId</th>
+                    <th>transcriptID</th>
+                    <th>distanceToTSS</th>
+                    <th>ENTREZID</th>
+                    <th>SYMBOL</th>
+                    <th>experimental_method</th>
+                </tr>
+            </thead>
+            <tbody id="markerTableBody">
+  
+            </tbody>
+        </table>
+    </div>
+  </div>
+            <!-- 图标展示区-end -->
+    
+    
+    
+            <!-- services-area -->
+            <section class="kb-services-area">
+                <div class="container">
+                    <div class="container-inner-wrap">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-6 col-lg-8">
+                                <div class="kb-section-title text-center mb-55">
+                                    <h2 class="title">Choose Your Support Online</h2>
+                                    <p>Get the latest Services and breaking news from Worald around the globe news</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-7">
-                            <div class="online-support-content">
-                                <h2 class="title">Artom Online Support</h2>
-                                <p>Online Customer Service is defined as any service that helps thea customers solve problems via the internet done by you
-                                customer support agents primary.</p>
-                                <div class="support-info-wrap">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="support-info-item">
-                                                <p>Around the clock support</p>
-                                                <h2><i class="flaticon-clockwise"></i> 24/7</h2>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                                <div class="kb-services-item">
+                                    <a href="services-details.html" class="kb-services-link"></a>
+                                    <div class="icon"><i class="flaticon-money-growth"></i></div>
+                                    <div class="content">
+                                        <h5>Knowledge Base<span class="new">NEW</span></h5>
+                                        <p>Knowledge base that organized collection system</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                                <div class="kb-services-item">
+                                    <a href="services-details.html" class="kb-services-link"></a>
+                                    <div class="icon"><i class="flaticon-credit-card"></i></div>
+                                    <div class="content">
+                                        <h5>Customer 360</h5>
+                                        <p>Knowledge base that organized collection system</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                                <div class="kb-services-item">
+                                    <a href="services-details.html" class="kb-services-link"></a>
+                                    <div class="icon"><i class="flaticon-bank"></i></div>
+                                    <div class="content">
+                                        <h5>Task and Alerts</h5>
+                                        <p>Knowledge base that organized collection system</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                                <div class="kb-services-item">
+                                    <a href="services-details.html" class="kb-services-link"></a>
+                                    <div class="icon"><i class="flaticon-clutch-disc"></i></div>
+                                    <div class="content">
+                                        <h5>Automation</h5>
+                                        <p>Knowledge base that organized collection system</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                                <div class="kb-services-item">
+                                    <a href="services-details.html" class="kb-services-link"></a>
+                                    <div class="icon"><i class="flaticon-idea"></i></div>
+                                    <div class="content">
+                                        <h5>Database Software<span class="new">NEW</span></h5>
+                                        <p>Knowledge base that organized collection system</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                                <div class="kb-services-item">
+                                    <a href="services-details.html" class="kb-services-link"></a>
+                                    <div class="icon"><i class="flaticon-online-service"></i></div>
+                                    <div class="content">
+                                        <h5>Articles</h5>
+                                        <p>Knowledge base that organized collection system</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- services-area-emd -->
+    
+            <!-- trial-area -->
+            <section class="trial-area">
+                <div class="container">
+                    <div class="container-inner-wrap">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="kb-trial-wrap">
+                                    <h2 class="title">Are you ready to get your business grossing</h2>
+                                    <div class="kb-trial-form" style="background-color: rgb(97, 83, 252);color: blue;">
+                                        <form action="#">
+                                            <input type="email" placeholder="Email address">
+                                            <button class="btn">14-day Free Trial <span></span></button>
+                                        </form>
+                                    </div>
+                                    <img src="img/images/trial_shape01.png" alt="" class="trial-shape top-shape wow fadeInDownBig" data-wow-delay=".3s" style="visibility: hidden; animation-delay: 0.3s; animation-name: none;">
+                                    <img src="img/images/trial_shape02.png" alt="" class="trial-shape bottom-shape wow fadeInUpBig" data-wow-delay=".3s" style="visibility: hidden; animation-delay: 0.3s; animation-name: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- trial-area-end -->
+    
+            <!-- online-support-area -->
+            <section class="online-support-area">
+                <div class="container">
+                    <div class="container-inner-wrap">
+                        <div class="row align-items-center">
+                            <div class="col-lg-5">
+                                <div class="online-support-img">
+                                    <img src="img/images/support_img.png" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="online-support-content">
+                                    <h2 class="title">Artom Online Support</h2>
+                                    <p>Online Customer Service is defined as any service that helps thea customers solve problems via the internet done by you
+                                    customer support agents primary.</p>
+                                    <div class="support-info-wrap">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="support-info-item">
+                                                    <p>Around the clock support</p>
+                                                    <h2><i class="flaticon-clockwise"></i> 24/7</h2>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="support-info-item">
-                                                <p>customer happiness rating</p>
-                                                <h2><i class="flaticon-happy"></i> 98.9%</h2>
+                                            <div class="col-sm-6">
+                                                <div class="support-info-item">
+                                                    <p>customer happiness rating</p>
+                                                    <h2><i class="flaticon-happy"></i> 98.9%</h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -368,123 +546,95 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- online-support-area-end -->
-
-    </main>
-    <!-- main-area-end -->
-
-
-    <!-- footer-area -->
-    <footer>
-        <div class="footer-top-wrap gray-bg">
-            <div class="container">
-                <div class="container-inner-wrap">
-                    <div class="row">
-                        <div class="col">
-                            <div class="footer-widget">
-                                <div class="fw-title">
-                                    <h5 class="title">Product</h5>
-                                </div>
-                                <div class="fw-link">
-                                    <ul>
-                                        <li><a href="services.html">Features</a></li>
-                                        <li><a href="services-details.html">Pricing</a></li>
-                                        <li><a href="contact.html">Create a free account</a></li>
-                                        <li><a href="contact.html">Privacy Policy &amp; GDPR</a></li>
-                                        <li><a href="contact.html">Terms of Service</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="footer-widget">
-                                <div class="fw-title">
-                                    <h5 class="title">Company</h5>
-                                </div>
-                                <div class="fw-link">
-                                    <ul>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="services-details.html">FunnelJoy</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="contact.html">Privacy Policy</a></li>
-                                    </ul>
+            </section>
+            <!-- online-support-area-end -->
+    
+        </main>
+        <!-- main-area-end -->
+    
+    
+        <!-- footer-area -->
+        <footer>
+            <div class="footer-top-wrap gray-bg">
+                <div class="container">
+                    <div class="container-inner-wrap">
+                        <div class="row">
+                            <div class="col">
+                                <div class="footer-widget">
+                                    <div class="fw-title">
+                                        <h5 class="title">Product</h5>
+                                    </div>
+                                    <div class="fw-link">
+                                        <ul>
+                                            <li><a href="services.html">Features</a></li>
+                                            <li><a href="services-details.html">Pricing</a></li>
+                                            <li><a href="contact.html">Create a free account</a></li>
+                                            <li><a href="contact.html">Privacy Policy &amp; GDPR</a></li>
+                                            <li><a href="contact.html">Terms of Service</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="footer-widget">
-                                <div class="fw-title">
-                                    <h5 class="title">SUPPORT &amp; TRAINING</h5>
-                                </div>
-                                <div class="fw-link">
-                                    <ul>
-                                        <li><a href="contact.html">Support</a></li>
-                                        <li><a href="index.html">Knowledge Base</a></li>
-                                        <li><a href="services-details.html">Webinars</a></li>
-                                        <li><a href="contact.html">API Documentation</a></li>
-                                        <li><a href="contact.html">Log In</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="footer-widget">
-                                <div class="fw-title">
-                                    <h5 class="title">Resources</h5>
-                                </div>
-                                <div class="fw-link">
-                                    <ul>
-                                        <li><a href="services-details.html">API reference</a></li>
-                                        <li><a href="services-details.html">Status</a></li>
-                                        <li><a href="contact.html">Get help</a></li>
-                                        <li><a href="services-details.html">Brand assets</a></li>
-                                    </ul>
+                            <div class="col">
+                                <div class="footer-widget">
+                                    <div class="fw-title">
+                                        <h5 class="title">Company</h5>
+                                    </div>
+                                    <div class="fw-link">
+                                        <ul>
+                                            <li><a href="about-us.html">About Us</a></li>
+                                            <li><a href="services-details.html">FunnelJoy</a></li>
+                                            <li><a href="blog.html">Blog</a></li>
+                                            <li><a href="contact.html">Contact Us</a></li>
+                                            <li><a href="contact.html">Privacy Policy</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="footer-widget text-left text-xl-right">
-                                <div class="fw-title">
-                                    <h5 class="title">SOCIAL MEDIA CONNECT</h5>
-                                </div>
-                                <div class="fw-social">
-                                    <ul>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    </ul>
+                            <div class="col">
+                                <div class="footer-widget">
+                                    <div class="fw-title">
+                                        <h5 class="title">SUPPORT &amp; TRAINING</h5>
+                                    </div>
+                                    <div class="fw-link">
+                                        <ul>
+                                            <li><a href="contact.html">Support</a></li>
+                                            <li><a href="index.html">Knowledge Base</a></li>
+                                            <li><a href="services-details.html">Webinars</a></li>
+                                            <li><a href="contact.html">API Documentation</a></li>
+                                            <li><a href="contact.html">Log In</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-wrap">
-            <div class="container">
-                <div class="container-inner-wrap">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-md-9">
-                            <div class="copyright-text">
-                                <div class="logo"><a href="index.html"><img src="img/logo/fw_logo.png" alt=""></a></div>
-                                <p>Copyright © 2021 Artom. All Rights Reserved.</p>
+                            <div class="col">
+                                <div class="footer-widget">
+                                    <div class="fw-title">
+                                        <h5 class="title">Resources</h5>
+                                    </div>
+                                    <div class="fw-link">
+                                        <ul>
+                                            <li><a href="services-details.html">API reference</a></li>
+                                            <li><a href="services-details.html">Status</a></li>
+                                            <li><a href="contact.html">Get help</a></li>
+                                            <li><a href="services-details.html">Brand assets</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3 d-none d-md-block">
-                            <div class="footer-lang">
-                                <div class="dropdown">
-                                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="img/icon/united-states.png" alt=""> English
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#"><img src="img/icon/russia.png" alt="">Russia</a>
-                                        <a class="dropdown-item" href="#"><img src="img/icon/thailand.png" alt="">Thailand</a>
-                                        <a class="dropdown-item" href="#"><img src="img/icon/india.png" alt="">India</a>
+                            <div class="col">
+                                <div class="footer-widget text-left text-xl-right">
+                                    <div class="fw-title">
+                                        <h5 class="title">SOCIAL MEDIA CONNECT</h5>
+                                    </div>
+                                    <div class="fw-social">
+                                        <ul>
+                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -492,11 +642,36 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- footer-area-end -->
-
-
+            <div class="copyright-wrap">
+                <div class="container">
+                    <div class="container-inner-wrap">
+                        <div class="row align-items-center">
+                            <div class="col-lg-8 col-md-9">
+                                <div class="copyright-text">
+                                    <div class="logo"><a href="index.html"><img src="img/logo/fw_logo.png" alt=""></a></div>
+                                    <p>Copyright © 2021 Artom. All Rights Reserved.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3 d-none d-md-block">
+                                <div class="footer-lang">
+                                    <div class="dropdown">
+                                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="img/icon/united-states.png" alt=""> English
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="#"><img src="img/icon/russia.png" alt="">Russia</a>
+                                            <a class="dropdown-item" href="#"><img src="img/icon/thailand.png" alt="">Thailand</a>
+                                            <a class="dropdown-item" href="#"><img src="img/icon/india.png" alt="">India</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer-area-end -->
 
 
 
@@ -516,76 +691,519 @@
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" ></script>
-    <!-- tree的js代码（第二部分） -->
+    <script src="./plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+    <script src="./plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="./js/proTree.js"></script>
+
 
     <script>
-        let currentPage = 1;
-        let totalPages = 1;
+    // 初始化过滤器状态
+    let filters = {
+        cellType: 'ALL',
+        method: 'ALL',
+        advanced: {}
+    };
+      $(document).ready(function() {
+    // 下面是表格处理节点
+          let table;
+          let allData = []; // 缓存所有数据
+      
 
-        // 主数据加载函数
-        function loadData(page = 1) {
-            const pageSize = $('#pageSize').val();
+      
+          // 获取数据并初始化表格
+          function initTable() {
+              fetch('http://127.0.0.1:8080/getMarker/')
+                  .then(response => response.json())
+                  .then(data => {
+                      allData = data;
+                    //   console.log("执行了");
+                      
+                      // console.log('Processed Data:', allData.slice(0, 1)); // 打印第一条数据
+                      renderTable(data);
+                    //   console.log("执行了1");
+
+                      console.log(
+    '表头列数:', $('#markerTable thead th').length,
+    '数据列数:', $('#markerTable tbody tr:first-child td').length
+);
+                  })
+                  .catch(error =>{ console.error('Error:', error)});
+          }
+      
+          // 数据过滤逻辑
+          function filterData(data) {
+              return data.filter(item => {
+                  const fields = item.fields;
+                //   console.log(fields.target);
+                  
+                  // 细胞类型过滤
+                  if (filters.cellType !== 'ALL' && fields.target !== filters.cellType) {
+                      return false;
+                  }
+                  
+                  // 实验方法过滤
+                  if (filters.method !== 'ALL' && fields.experimental_method !== filters.method) {
+                      return false;
+                  }
+                  
+                  // 高级过滤
+                  return Object.entries(filters.advanced).every(([key, value]) => {
+                      if (!value) return true;
+                      const fieldValue = fields[key];
+                      
+                      // 处理数值范围
+                      if (typeof fieldValue === 'number') {
+                          const [min, max] = value.split(',').map(Number);
+                          return fieldValue >= min && fieldValue <= max;
+                      }
+                      
+                      return fieldValue.toString().includes(value);
+                  });
+              });
+          }
+      
+          // 渲染表格
+          function renderTable(data) {
+            const dtApi = $.fn.dataTable.Api('#markerTable');
+              if (dtApi) {
+                  dtApi.destroy();
+                  $('#markerTable').empty().append('<thead><tr><th>region</th><th>seqnames</th><th>Start</th><th>End</th><th>Target</th><th>direction</th><th>Width</th><th>StartCpG</th><th>EndCpG</th><th>LenCpG</th><th>bp</th><th>Tg_mean</th><th>Bg_mean</th><th>Delta_mean</th><th>Delta_quants</th><th>Delta_maxmin</th><th>ttest</th><th>annotation</th><th>geneId</th><th>transcriptID</th><th>distanceToTSS</th><th>ENTREZID</th><th>SYMBOL</th><th>experimental_method</th></tr></thead><tbody id="markerTableBody"></tbody>'); // 重建基础结构
+              }
+              const tbody = $('#markerTableBody');
+              tbody.empty();
+
+
+            //   console.log("执行了");
+              
+              // 销毁旧实例并清理DOM
+
+              
+            //   console.log('Processed Data:', data.slice(0, 100)); 
+              data.forEach(item => {
+                  const fields = item.fields;
+                  const row = `
+                      <tr>
+                          <td>${fields.region}</td>
+                          <td>${fields.seqnames}</td>
+                          <td>${fields.start}</td>
+                          <td>${fields.end}</td>
+                          <td>${fields.target}</td>
+                          <td>${fields.direction}</td>
+                          <td>${fields.width}</td>
+                          <td>
+                              <span class="badge bg-blue-100 text-blue-800">${fields.startCpG}</span>
+                          </td>
+                          <td>${fields.endCpG}</td>
+                          <td>${fields.lenCpG}</td>
+                          <td>${fields.bg}</td>
+                          <td>${fields.tg_mean}</td>
+                          <td>${fields.bg_mean}</td>
+                          <td>${fields.delta_means}</td>
+                          <td>${fields.delta_quants}</td>
+                          <td>${fields.delta_maxmin}</td>
+                          <td>${fields.ttest}</td>
+                          <td>${fields.annotation}</td>
+                          <td>${fields.geneId}</td>
+                          <td>${fields.transcriptId}</td>
+                          <td>${fields.distanceToTSS}</td>
+                          <td>${fields.ENTREZID}</td>
+                          <td>${fields.SYMBOL}</td>
+                          <td>${fields.experimental_method}</td>
+                      </tr>
+                  `;
+                  tbody.append(row);
+              });
+      
+            //   console.log("执行了1");
+              console.log(
+    '表头列数:', $('#markerTable thead th').length,
+    '数据列数:', $('#markerTable tbody tr:first-child td').length
+);
+              // 修改 DataTable 配置
+              table = $('#markerTable').DataTable({
+                destroy: true,
+                lengthChange: false,
+                buttons: {
+                    dom: {
+                        button: {
+                            className: 'tailwind-button' // 为所有按钮添加基础类
+                        }
+                    },
+                    buttons: [
+                        {
+                            extend: 'copy',
+                            className: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
+                            text: '<i class="mr-1 fas fa-copy"></i> COPY'
+                        },
+                        {
+                            extend: 'excel',
+                            className: 'bg-green-500 hover:bg-green-600 text-white',
+                            text: '<i class="mr-1 fas fa-file-excel"></i> Excel'
+                        },
+                        {
+                            extend: 'pdf',
+                            className: 'bg-red-500 hover:bg-red-600 text-white',
+                            text: '<i class="mr-1 fas fa-file-pdf"></i> PDF'
+                        },
+                        {
+                            extend: 'print',
+                            className: 'bg-blue-500 hover:bg-blue-600 text-white',
+                            text: '<i class="mr-1 fas fa-print"></i> Print'
+                        }
+                    ]
+                },
+                paging: true,
+                // 修正后的 dom 配置（包含搜索框）
+                dom: `<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>
+                    <"row"<"col-sm-12"B>>
+                                            <"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>
+                    <"row"<"col-sm-12"tr>>`,
+                language: {
+                    search: "Search：",
+                    searchPlaceholder: "Enter the keyword...",
+                    // info: "显示 _START_ - _END_ / 共 _TOTAL_ 项",
+                    paginate: {
+                        previous: '<i class="fas fa-chevron-left"></i>',
+                        next: '<i class="fas fa-chevron-right"></i>'
+                    }
+                },
+
+              });
+              
+              console.log(
+    '表头列数:', $('#markerTable thead th').length,
+    '数据列数:', $('#markerTable tbody tr:first-child td').length
+);
+          }
+      
+          // 事件监听
+          // 添加新的过滤事件监听
+          $('#filterWidth').on('input', function() {
+              filters.advanced.width = $(this).val();
+              renderTable(filterData(allData));
+          });
+
+          $('#filterStartCpG').on('input', function() {
+              filters.advanced.startCpG = $(this).val();
+              renderTable(filterData(allData));
+          });
+          //细胞类型过滤
+          $('#cellTypeFilter').change(function() {
+              filters.cellType = $(this).val();
+              console.log($(this).val());
+            //   console.log('Processed Data:', filterData(allData).slice(0, 1)); 
+              renderTable(filterData(allData));
+          });
+      //细胞方法过滤
+          $('.filter-method').click(function() {
+              $('.filter-method').removeClass('active bg-blue-100 text-blue-800');
+              $('.filter-method').addClass('py-1 rounded-md bg-gray-100 text-gray-700');
+              $(this).removeClass('py-1 rounded-md bg-gray-100 text-gray-700');
+              $(this).addClass('active bg-blue-100 text-blue-800');
+              filters.method = $(this).data('method');
+              renderTable(filterData(allData));
+          });
+      
+          $('#toggleFilterPanel').click(function() {
+              $('#filterPanel').toggleClass('hidden');
+          });
+      
+          // 高级过滤输入
+          $('#filterSeqnames').on('input', function() {
+              filters.advanced.seqnames = $(this).val();
+              renderTable(filterData(allData));
+          });
+      
+          // 初始化表格
+          initTable();
+
+
+
+          const treeDataEn = {
+        "name": "HUMAN EMBRYONIC(TOTIPOTENT)STEM CELL",
+        "children": [
+            {
+                "name": "Ectoderm",
+                "children": [
+                    { "name": "Head-Neck-Ep" },
+                    {
+                        "name": "Mulltpotent neural crest precursors",
+                        "children": [
+                            {
+                                "name": "Melanocyte precursor",
+                                "children": [{"name": "Pigment cells"}]
+                            },
+                            {
+                                "name": "Neural Stem Cells",
+                                "children": [
+                                    {
+                                        "name": "Glial Progenitor",
+                                        "children": [{"name": "Astrocyte"}, {"name": "Oligodendrocyte"}]
+                                    },
+                                    {
+                                        "name": "Neuron Progenitor",
+                                        "children": [{"name": "Neuron"}, {"name": "Nerve"}]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Keratinocyte stem/progenitor cells",
+                        "children": [{"name": "Keratinocyte epidermal skin cells"}]
+                    },
+                    {
+                        "name": "endocrine",
+                        "children": [
+                            {
+                                "name": "Pituitary gland",
+                                "children": [{"name": "Adenohypophysis"}]
+                            },
+                            {
+                                "name": "breast",
+                                "children": [{"name": "Breast-Basal-Ep"}, {"name": "Breast-Luminal-Ep"}]
+                            },
+                            {
+                                "name": "adrenal_gland"
+                            },
+                            {
+                                "name": "salivary gland"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Mesoderm",
+                "children": [
+                    {
+                        "name": "Mesenchymal stem cells",
+                        "children": [
+                            {"name": "Osteoblasts"},
+                            {"name": "Chondrocytes"},
+                            {"name": "Myocytes"},
+                            {"name": "Smooth Muscle"},
+                            {"name": "Stromal cells"},
+                            {"name": "Lipoblasts/preadipocytes", "children": [{"name": "Adipocytes"}]},
+                            {"name": "spleen"}
+                        ]
+                    },
+                    {
+                        "name": "Hematopoietic",
+                        "children": [
+                            {
+                                "name": "Myeloid precursor",
+                                "children": [
+                                    {"name": "Erythrocytes"},
+                                    {
+                                        "name": "Granulocytes",
+                                        "children": [
+                                            {"name": "neutrophil"},
+                                            {"name": "eosinophil"},
+                                            {"name": "basophil"}
+                                        ]
+                                    },
+                                    {
+                                        "name": "Megakaryocytes",
+                                        "children": [{"name": "Platelets"}]
+                                    },
+                                    {
+                                        "name": "Monocytes",
+                                        "children": [{"name": "Macrophages"}]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Lymphoid",
+                                "children": [
+                                    {"name": "T cells"},
+                                    {"name": "B cells"},
+                                    {"name": "NK cells"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Endothelial progenitors/stem cells",
+                        "children": [
+                            {"name": "Lymphatic vascular cells"},
+                            {"name": "Arteries, veins"}
+                        ]
+                    },
+                    {
+                        "name": "Cardiac progenitors",
+                        "children": [
+                            {"name": "Cardiac endothelial cells"},
+                            {"name": "Cardiac conduction cells"}
+                        ]
+                    },
+                    {
+                        "name": "Reproductive",
+                        "children": [
+                            {
+                                "name": "Gonads",
+                                "children": [
+                                    {"name": "Ovary"},
+                                    {"name": "Testis"},
+                                    {"name": "Uterus"},
+                                    {"name": "Vagina"}
+                                ]
+                            },
+                            {
+                                "name": "Fallopian tube"
+                            },
+                            {
+                                "name": "Prostate"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Urinary",
+                        "children": [
+                            {"name": "Ureter"},
+                            {"name": "Bladder"},
+                            {"name": "Kidney"}
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Endoderm",
+                "children": [
+                    {
+                        "name": "Thyroid progenitors",
+                        "children": [{"name": "Thyroid cells"}]
+                    },
+                    {
+                        "name": "Multipotent lung precursor cells",
+                        "children": [
+                            {
+                                "name": "Aveolar lung cells",
+                                "children": [{"name": "Lung-Ep-Alveo"}]
+                            },
+                            {
+                                "name": "Tracheo bronchial cells",
+                                "children": [{"name": "Lung-Ep-Bron"}]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Digestive",
+                        "children": [
+                            {
+                                "name": "Pancreatic progenitors",
+                                "children": [
+                                    {
+                                        "name": "Pancreas",
+                                        "children": [
+                                            {"name": "Pancreas-Acinar"},
+                                            {"name": "Pancreas-Alpha"},
+                                            {"name": "Pancreas-Beta"},
+                                            {"name": "Pancreas-Delta"},
+                                            {"name": "Pancreas Duct"}
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "Gut progenitors",
+                                "children": [
+                                    {"name": "Gut epithelial cells"},
+                                    {"name": "Colon-Ep"},
+                                    {"name": "Small-int Ep"}
+                                ]
+                            },
+                            {
+                                "name": "Esophagus"
+                            },
+                            {
+                                "name": "Hepatic progenitors/stem cells",
+                                "children": [{"name": "Hepatocytes"}]
+                            },
+                            {
+                                "name": "Stomach",
+                                "children": [{"name": "Gastric-Ep"}]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Thyroid progenitors",
+                        "children": [{"name": "Thyroid cells"}]
+                    }
+                ]
+            },
+            {
+                "name": "Primordial Germ cell",
+                "children": [{"name": "Ovum"}, {"name": "Sperm"}]
+            }
+        ]
+    };
             
-            fetch(`http://127.0.0.1:8000/getSample/?page=${page}&page_size=${pageSize}`)
-                .then(response => response.json())
-                .then(data => {
-                    // 更新分页信息
-                    currentPage = data.current_page;
-                    totalPages = data.total_pages;
+
+            // 将树形结构数据转换为扁平化数组格式
+            function convertTreeToFlat(data) {
+                let idCounter = 1;
+                const result = [];
+                
+                function processNode(node, pid) {
+                    const id = idCounter++;
+                    result.push({ id, name: node.name, pid });
                     
-                    // 渲染表格
-                    const tbody = document.getElementById('sampleTableBody');
-                    tbody.innerHTML = data.results.map(item => `
-                        <tr>
-                            <td>${item.fields.sample_id}</td>
-                            <td>${item.fields.series}</td>
-                            <td>${item.fields.group}</td>
-                            <td>${item.fields.cell_tissue_type}</td>
-                            <td>${item.fields.detail}</td>
-                            <td>${item.fields.source}</td>
-                            <td>${item.fields.medical_condition}</td>
-                            <td>${item.fields.experimental_method}</td>
-                        </tr>
-                    `).join('');
-
-                    // 更新分页控件
-                    updatePaginationControls();
-                })
-                .catch(error => console.error('Error:', error));
-        }
-
-        // 更新分页控件状态
-        function updatePaginationControls() {
-            $('#currentPage').text(`Page ${currentPage} of ${totalPages}`);
-            $('#prevPage').prop('disabled', currentPage === 1);
-            $('#nextPage').prop('disabled', currentPage === totalPages);
-        }
-
-        // 事件监听
-        $(document).ready(() => {
-            // 初始加载
-            loadData();
-
-            // 上一页
-            $('#prevPage').click(() => {
-                if (currentPage > 1) {
-                    loadData(currentPage - 1);
+                    if (node.children) {
+                        node.children.forEach(child => {
+                            processNode(child, id);
+                        });
+                    }
                 }
-            });
+                
+                processNode(data, 0);
+                return result;
+            }
 
-            // 下一页
-            $('#nextPage').click(() => {
-                if (currentPage < totalPages) {
-                    loadData(currentPage + 1);
-                }
-            });
+            // 生成符合插件要求的数据格式
+            const flatData = convertTreeToFlat(treeDataEn);
 
-            // 分页大小变更
-            $('#pageSize').change(() => {
-                currentPage = 1;
-                loadData();
-            });
-        });
-    </script>
+    // 创建节点映射表用于快速查找
+    const nodeMap = flatData.reduce((map, node) => {
+        map[node.id] = node;
+        return map;
+    }, {});
 
-</body></html>
+    // 添加hasChildren属性标识是否有子节点
+    flatData.forEach(node => {
+        node.hasChildren = flatData.some(n => n.pid === node.id);
+    });
+
+// 修改后的 ProTree 初始化代码
+$(".innerUl").ProTree({
+    arr: flatData,
+    close: true,
+    simIcon: "pt-file",
+    mouIconOpen: "pt-folder-open",
+    mouIconClose: "pt-folder-close",
+    callback: function(id, name, $span) {
+        const currentNode = nodeMap[id];
+        console.log($span);
+        if (!currentNode.hasChildren) {
+            // 清除其他节点的选中状态
+            $('.pt-node.pt-selected').not($span).removeClass('pt-selected');
+            
+            // 切换当前节点状态
+            $span.toggleClass('pt-selected');
+            
+            // 更新过滤器
+            filters.cellType = $span.hasClass('pt-selected') ? name : "ALL";
+            console.log('当前筛选条件:', filters);
+            
+            // 重新渲染表格
+            renderTable(filterData(allData));
+        }
+    }
+});
+      });
+
+      </script>
+
+      
+</body>
+</html>
